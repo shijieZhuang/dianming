@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="how2java.mapper.StudentMapper">
+	<insert id="add" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+		insert into student ( school,college,profession,grade,student_ID,s_class,name,tel,last_land_time,online )
+		values (#{school},#{college},#{profession},#{grade},#{student_ID},#{s_class},#{name},#{tel},#{last_land_time},#{online})
+	</insert>
+
+	<delete id="delete" parameterType="Student" >
+		delete from student where id= #{id}
+	</delete>
+
+	<select id="get" parameterType="_int" resultType="Student">
+		select * from student where id= #{id}
+	</select>
+
+	<update id="update" parameterType="Student" >
+		update student set school=#{school},college=#{college},profession=#{profession},grade=#{grade},student_ID=#{student_ID},
+		s_class=#{s_class},name=#{name},tel=#{tel},last_land_time=#{last_land_time},reg_time=#{reg_time},online=#{online} where id=#{id}
+	</update>
+	<!--<select id="list" resultType="Student">-->
+	<!--select * from student-->
+	<!--</select>-->
+
+	<update id="updateOnline" parameterType="Student" >
+		update student set online=#{online} where id=#{id}
+	</update>
+
+	<select id="list" resultType="Student">
+		select * from  student  order by id desc
+		<if test="start!=null and count!=null">
+			limit #{start},#{count}
+		</if>
+
+	</select>
+	<select id="total" resultType="int">
+		select count(*) from student
+	</select>
+	<select id="getStudentId" parameterType="int" resultType="Student">
+		select student_ID,name from  student  where id= #{id}
+	</select>
+	</mapper>
+

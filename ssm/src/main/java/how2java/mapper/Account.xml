@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="how2java.mapper.AccountMapper">
+	<insert id="add" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
+        insert into account ( account_number,login_credent,landing_type,role_id,S_T_id )
+        values (#{account_number},#{login_credent},#{landing_type},#{role_id},#{S_T_id})
+    </insert>
+	    
+	    <delete id="delete" parameterType="Account" >
+	        delete from account where id= #{id}
+	    </delete>
+	    
+	    <select id="get" parameterType="_int" resultType="Account">
+	        select * from   account  where id= #{id}
+	    </select>
+
+	    <update id="update" parameterType="Account" >
+	        update account set name=#{name} where id=#{id}
+	    </update>
+	    <select id="list" resultType="Account">
+	        select * from   account
+	    </select>
+	<select id="findByUsername" resultType="Account">
+		select * from   account where account_number = #{account_number}
+	</select>
+</mapper>
+

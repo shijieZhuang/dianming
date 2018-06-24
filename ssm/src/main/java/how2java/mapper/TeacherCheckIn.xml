@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="how2java.mapper.TeacherCheckInMapper">
+	<insert id="add" parameterType="Teacher" useGeneratedKeys="true" keyProperty="id">
+		insert into teachercheckin ( course_ID,longitude,teacher_ID,latitude,time,state,Last_time )
+		values (#{course_ID},#{longitude},#{teacher_ID},#{latitude},#{time},#{state},#{Last_time})
+	</insert>
+
+	    <delete id="delete" parameterType="Teachercheckin" >
+	        delete from teachercheckin where id= #{id}
+	    </delete>
+	    
+	    <select id="getByCourseId" parameterType="int" resultType="Teachercheckin">
+	        select * from   teachercheckin  where course_ID= #{course_id} and state=1
+	    </select>
+	<select id="get" parameterType="int" resultType="Teachercheckin">
+		select * from  teachercheckin  where id= #{id}
+	</select>
+	    <update id="update" parameterType="Teachercheckin" >
+	        update teachercheckin set Last_time=#{Last_time},state=#{state} where id=#{id}
+	    </update>
+	    <select id="list" resultType="Teachercheckin">
+	        select * from   teachercheckin
+	    </select>	    
+	</mapper>
+

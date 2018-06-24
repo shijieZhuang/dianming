@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="how2java.mapper.NameRecordMapper">
+		<insert id="add" parameterType="Namerecord" >
+			insert into namerecord ( course_ID,student_ID,absence ) values (#{course_ID},#{student_ID},#{absence})
+		</insert>
+
+		<delete id="delete" parameterType="Namerecord" >
+			delete from namerecord where id= #{id}
+		</delete>
+
+		<select id="get" parameterType="_int" resultType="Namerecord">
+			select * from namerecord  where id= #{id}
+		</select>
+	<select id="getBycourseId" parameterType="int" resultType="Namerecord">
+		select * from namerecord  where course_ID= #{courseid}
+	</select>
+		<update id="update" parameterType="Namerecord" >
+			update namerecord set course_ID=#{course_ID},student_ID=#{student_ID},absence=#{absence} where id=#{id}
+		</update>
+	<select id="list" resultType="Namerecord">
+		select t1.course_ID as course_ID,t2.course_name as course_name,t2.course_number as course_number,t2.class_time as class_time,t2.class_location as class_location,
+		t3.name as name from namerecord as t1
+		LEFT JOIN course as t2 on t1.course_ID = t2.id
+		LEFT JOIN teacher as t3 on t2.teacherID = t3.teacher_ID
+		where t1.student_ID= #{studentID}
+	</select>
+	</mapper>
+
